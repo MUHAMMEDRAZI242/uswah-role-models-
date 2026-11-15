@@ -1,0 +1,677 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>USWAH ROLE MODELS</title>
+<style>
+:root{
+ --bg:#101410;--panel:#191f1a;--panel2:#202820;
+ --lime:#d5ff42;--text:#f3f6ef;--muted:#9aa59a;
+ --border:#303a30;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
+.app{min-height:100vh;display:flex}
+.sidebar{
+ width:245px;position:fixed;inset:0 auto 0 0;
+ background:#141a15;border-right:1px solid var(--border);
+ padding:25px 16px;display:flex;flex-direction:column;z-index:10;
+}
+.brand{padding:5px 10px 28px}
+.brand h2{font-size:22px;margin:0;color:var(--lime);letter-spacing:2px}
+.brand p{font-size:11px;color:var(--muted);letter-spacing:3px}
+.nav-label{font-size:10px;color:#788278;letter-spacing:2px;padding:15px 12px 8px}
+.nav-btn{
+ display:flex;align-items:center;gap:12px;width:100%;
+ background:transparent;border:0;color:#aeb8ae;text-align:left;
+ padding:13px 12px;border-radius:9px;margin:3px 0;transition:.25s;
+}
+.nav-btn:hover{background:#263026;color:white;transform:translateX(3px)}
+.nav-btn.active{background:#293520;color:var(--lime)}
+.nav-btn .num{font-size:11px;opacity:.65}
+.side-bottom{margin-top:auto;border-top:1px solid var(--border);padding:18px 10px;color:var(--muted);font-size:12px}
+.main{margin-left:245px;width:calc(100% - 245px);padding:32px 4vw}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px}
+.eyebrow{font-size:11px;color:var(--lime);letter-spacing:2px}
+.topbar h1{font-size:25px;margin:7px 0}
+.status{border:1px solid var(--border);border-radius:30px;padding:9px 14px;color:var(--lime);font-size:11px}
+.page{display:none}
+.page.active{display:block;animation:pageIn .4s ease both}
+@keyframes pageIn{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+.hero{
+ min-height:300px;border:1px solid var(--border);border-radius:18px;padding:40px;
+ background:radial-gradient(ellipse at 90% 20%,#31451e 0%,transparent 45%),linear-gradient(130deg,#1d261d,#111711);
+ display:flex;flex-direction:column;justify-content:center;
+}
+.hero small{color:var(--lime);letter-spacing:3px}
+.hero h2{font-size:clamp(36px,6vw,65px);line-height:1.02;margin:20px 0}
+.hero h2 span{color:var(--lime)}
+.hero p{color:#b3bdb1;max-width:570px;line-height:1.7}
+.section-title{font-size:23px;margin:0 0 20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px;margin:22px 0}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:13px;padding:20px;transition:.25s}
+.card:hover{border-color:#6d8738;transform:translateY(-2px)}
+.stat-number{font-size:32px;color:var(--lime);font-weight:750}
+.muted{color:var(--muted);font-size:13px}
+label{display:block;font-size:12px;color:#b7c1b5;margin:12px 0 6px}
+input,select{
+ width:100%;padding:12px 13px;background:#111711;color:white;
+ border:1px solid var(--border);border-radius:8px;outline:none;
+}
+input:focus,select:focus{border-color:var(--lime)}
+select option{background:#111711}
+.action{
+ background:var(--lime);color:#111711;border:0;border-radius:8px;
+ padding:12px 18px;font-weight:750;margin-top:14px;transition:.2s;
+}
+.action:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.danger{background:#713333;color:white}
+.secondary{background:#303a30;color:white}
+.wings{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.wing-button{
+ padding:25px 15px;background:var(--panel);border:1px solid var(--border);
+ color:white;border-radius:12px;text-align:left;font-weight:bold;transition:.25s;
+}
+.wing-button:hover{border-color:var(--lime);color:var(--lime);transform:translateY(-4px)}
+.wing-button span{display:block;color:var(--muted);font-size:11px;margin-top:10px}
+.profile-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.profile-card{text-align:center;background:#141b15;border:1px solid var(--border);border-radius:13px;padding:20px}
+.profile-img{
+ width:125px;height:125px;border-radius:50%;object-fit:cover;
+ background:#293329;border:3px solid var(--lime);margin:10px auto;display:block;
+}
+.record{background:var(--panel);border:1px solid var(--border);padding:16px;border-radius:10px;margin:10px 0}
+.record b{color:var(--lime)}
+.record .action{padding:8px 12px;font-size:12px}
+table{width:100%;border-collapse:collapse;min-width:420px}
+.table-wrap{overflow-x:auto;background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:8px}
+th,td{text-align:left;padding:14px;border-bottom:1px solid var(--border);font-size:13px}
+th{color:var(--lime);font-size:11px;letter-spacing:1px}
+tr:last-child td{border-bottom:0}
+.top-rank{color:var(--lime);font-weight:bold}
+.lock{max-width:420px;margin:35px auto;text-align:center}
+.hidden{display:none!important}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px}
+.program-card{cursor:pointer}
+.program-card:hover{border-color:var(--lime)}
+footer{color:#6e796e;font-size:11px;margin-top:40px}
+@media(max-width:760px){
+ .sidebar{width:100%;height:auto;position:relative;inset:auto;padding:12px}
+ .brand{padding:5px 8px}
+ .brand p{margin:5px 0}
+ .nav-label,.side-bottom{display:none}
+ .sidebar nav{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
+ .nav-btn{justify-content:center;padding:10px 3px;font-size:10px;gap:4px}
+ .nav-btn .num{display:none}
+ .app{display:block}
+ .main{margin:0;width:100%;padding:20px 15px}
+ .topbar{margin-bottom:20px}
+ .hero{padding:25px;min-height:260px}
+ .status{font-size:9px}
+}
+@media(max-width:430px){.profile-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand"><h2>USWAH.</h2><p>ROLE MODELS</p></div>
+ <div class="nav-label">MAIN MENU</div>
+ <nav>
+  <button class="nav-btn active" data-page="home" onclick="showPage('home',this)"><span class="num">01</span> Home</button>
+  <button class="nav-btn" data-page="committee" onclick="showPage('committee',this)"><span class="num">02</span> Committee</button>
+  <button class="nav-btn" data-page="wings" onclick="showPage('wings',this)"><span class="num">03</span> Wings</button>
+  <button class="nav-btn" data-page="events" onclick="showPage('events',this)"><span class="num">04</span> Events Diary</button>
+  <button class="nav-btn" data-page="programmes" onclick="showPage('programmes',this)"><span class="num">05</span> Programmes</button>
+  <button class="nav-btn" data-page="diary" onclick="showPage('diary',this)"><span class="num">06</span> USWAH Diary</button>
+  <button class="nav-btn" data-page="ranking" onclick="showPage('ranking',this)"><span class="num">07</span> Ranking</button>
+ </nav>
+ <div class="side-bottom">USWAH ROLE MODELS<br>LEADERSHIP · UNITY · EXCELLENCE</div>
+</aside>
+
+<main class="main">
+ <div class="topbar">
+  <div><div class="eyebrow">CLASS UNION / OFFICIAL PORTAL</div><h1 id="pageTitle">Dashboard</h1></div>
+  <div class="status">● SYSTEM ACTIVE</div>
+ </div>
+
+ <section class="page active" id="home">
+  <div class="hero">
+   <small>WELCOME TO OUR COMMUNITY</small>
+   <h2>LEADERSHIP.<br><span>UNITY.</span><br>EXCELLENCE.</h2>
+   <p>Building responsible leaders, encouraging talents and creating a culture of teamwork, discipline and excellence.</p>
+  </div>
+  <div class="grid">
+   <div class="card"><div class="stat-number">06</div><div class="muted">ACTIVE WINGS</div></div>
+   <div class="card"><div class="stat-number">26</div><div class="muted">CLASS MEMBERS</div></div>
+   <div class="card"><div class="stat-number" id="totalEvents">00</div><div class="muted">POINT RECORDS</div></div>
+  </div>
+  <div class="card"><div class="eyebrow">OUR VISION</div><h2>Every Student. Every Talent. Every Opportunity.</h2><p class="muted">A platform to organise activities, recognise achievements and celebrate student contributions.</p></div>
+ </section>
+
+ <section class="page" id="committee">
+  <h2 class="section-title">USWAH COMMITTEE</h2>
+  <div class="role-grid" id="committeeGrid"></div>
+ </section>
+
+ <section class="page" id="wings">
+  <h2 class="section-title">OUR WINGS</h2>
+  <p class="muted">Select a wing to view and edit its Chairman and Convenor details.</p>
+  <div class="wings" id="wingButtons"></div>
+  <div id="wingDetails" class="card hidden" style="margin-top:22px">
+   <div class="eyebrow">WING PROFILE</div>
+   <h2 id="wingTitle"></h2>
+   <div class="profile-grid">
+    <div class="profile-card">
+     <div class="eyebrow">CHAIRMAN</div>
+     <img id="chairImg" class="profile-img" alt="Chairman">
+     <h3 id="chairName">Chairman Name</h3>
+    </div>
+    <div class="profile-card">
+     <div class="eyebrow">CONVENOR</div>
+     <img id="convImg" class="profile-img" alt="Convenor">
+     <h3 id="convName">Convenor Name</h3>
+    </div>
+   </div>
+   <h3>Edit Wing Details</h3>
+   <label>Chairman Name</label><input id="chairNameInput" placeholder="Chairman name">
+   <label>Chairman Image URL</label><input id="chairImgInput" placeholder="Paste image URL">
+   <label>Convenor Name</label><input id="convNameInput" placeholder="Convenor name">
+   <label>Convenor Image URL</label><input id="convImgInput" placeholder="Paste image URL">
+   <button class="action" onclick="saveWing()">Save Wing Details</button>
+  </div>
+ </section>
+
+ <section class="page" id="events">
+  <h2 class="section-title">EVENTS DIARY</h2>
+  <div id="eventsLocked" class="lock card">
+   <div class="eyebrow">WING ACCESS</div><h2>Events Diary Login</h2>
+   <p class="muted">Choose your wing and enter its password.</p>
+   <label>Select Wing</label><select id="loginWing"></select>
+   <label>Password</label><input id="eventsPassword" type="password" placeholder="Enter wing password">
+   <button class="action" onclick="unlockEvents()">Login</button>
+  </div>
+
+  <div id="eventsContent" class="hidden">
+   <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+     <div><div class="eyebrow">LOGGED IN WING</div><h2 id="loggedWing"></h2></div>
+     <button class="action secondary" onclick="logoutEvents()">Logout</button>
+    </div>
+    <div class="eyebrow">NEW EVENT RECORD</div>
+    <label>Wing</label><select id="eventWing" disabled></select>
+    <label>Programme Name</label><input id="eventProgram" placeholder="Enter programme name">
+    <label>Student</label><select id="eventStudent"></select>
+    <label>Date</label><input id="eventDate" type="date">
+    <label>Position</label>
+    <select id="eventPosition">
+     <option>1st</option><option>2nd</option><option>3rd</option><option>Participation</option>
+    </select>
+    <label>Points — Enter manually</label><input id="eventPoints" type="number" min="0" placeholder="Enter points">
+    <button class="action" onclick="addEvent()">+ Add Event</button>
+   </div>
+   <h3>Event Records</h3><div id="eventList"></div>
+  </div>
+ </section>
+
+ <section class="page" id="programmes">
+  <h2 class="section-title">PROGRAMMES</h2>
+  <p class="muted">All programmes recorded in Events Diary will appear here. Select a programme to view its results.</p>
+  <div id="programList"></div>
+  <div id="programResults" class="card hidden" style="margin-top:20px">
+   <button class="action secondary" onclick="closeProgramResults()">← Back to Programmes</button>
+   <h2 id="programResultTitle"></h2>
+   <div id="programResultList"></div>
+  </div>
+ </section>
+
+ <section class="page" id="diary">
+  <h2 class="section-title">USWAH EVENTS DIARY</h2>
+  <div id="diaryLocked" class="lock card">
+   <div class="eyebrow">RESTRICTED ACCESS</div><h2>USWAH Diary</h2>
+   <p class="muted">Enter the password to continue.</p>
+   <input id="diaryPassword" type="password" placeholder="Enter password">
+   <button class="action" onclick="unlockDiary()">Unlock Diary</button>
+  </div>
+  <div id="diaryContent" class="hidden">
+   <div class="card">
+    <div class="eyebrow">ADD STUDENT POINTS</div>
+    <label>Select Student</label><select id="diaryStudent"></select>
+    <label>Programme</label><input id="diaryProgram" placeholder="Enter programme name">
+    <label>Points</label><input id="diaryPoints" type="number" min="0" placeholder="Enter points">
+    <button class="action" onclick="addDiary()">+ Add Points</button>
+   </div>
+   <h3>Points Records</h3><div id="diaryList"></div>
+  </div>
+ </section>
+
+ <section class="page" id="ranking">
+  <h2 class="section-title">STUDENT RANKING</h2>
+  <p class="muted">Automatically calculated from both diaries.</p>
+  <div class="grid" id="topThree"></div>
+  <div class="table-wrap"><table>
+   <thead><tr><th>RANK</th><th>STUDENT</th><th>TOTAL POINTS</th></tr></thead>
+   <tbody id="rankingRows"></tbody>
+  </table></div>
+ </section>
+
+ <footer>USWAH ROLE MODELS · OFFICIAL CLASS UNION PORTAL</footer>
+</main>
+</div>
+
+<script>
+const students=[
+ "Muhammed Atheeq","Al Ameen","Muhammed Shammas","Muhammed S",
+ "Muhammed Rihan","Shakir","Muhammed Rizwan","Muhammed Thoufeeq",
+ "Abdulla SH","Ahmed Luqman","Munnavar Ali","Muhammed Shameem",
+ "Muhammed Razi","Ahmed Yaseen","Muhammed Hadi","Hallad",
+ "Muhammed Faheem","Muhammed Afnan","Muhammed Shifin","Muhammed Fayeez",
+ "Muhammed Shadil","Muhammed Ajsal","Muhammed Ajnas","Muhammed Ihsan",
+ "MUHAMMED HASHIM","MUHAMMED FARHAN"
+];
+
+const wings=["PKV","GK WING","MALAYALAM WING","ENGLISH WING","URDU WING","ARABI WING"];
+
+const wingPasswords={
+ "PKV":"pkv123",
+ "GK WING":"gk123",
+ "MALAYALAM WING":"mal123",
+ "ENGLISH WING":"eng123",
+ "URDU WING":"urdu123",
+ "ARABI WING":"arabi123"
+};
+
+const committeeRoles=[
+ {key:"president",title:"President",oldName:"uswah_president",oldImg:"uswah_president_img"},
+ {key:"vice_president",title:"Vice President"},
+ {key:"secretary",title:"Secretary",oldName:"uswah_secretary",oldImg:"uswah_secretary_img"},
+ {key:"joint_secretary",title:"Joint Secretary"},
+ {key:"treasurer",title:"Treasurer"}
+];
+
+const placeholder=role=>"https://placehold.co/240x240/202820/D5FF42?text="+encodeURIComponent(role);
+
+function read(key,fallback){
+ try{return JSON.parse(localStorage.getItem(key))??fallback}
+ catch(e){return fallback}
+}
+function save(key,value){localStorage.setItem(key,JSON.stringify(value))}
+function safe(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+let events=read("uswah_events",[]);
+let diary=read("uswah_diary",[]);
+let profiles=read("uswah_profiles",{});
+let currentWing="";
+
+function showPage(id,button){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+ const active=button||document.querySelector('[data-page="'+id+'"]');
+ if(active)active.classList.add("active");
+
+ const titles={
+  home:"Dashboard",committee:"Committee",wings:"Our Wings",
+  events:"Events Diary",programmes:"Programmes",
+  diary:"USWAH Events Diary",ranking:"Student Ranking"
+ };
+ document.getElementById("pageTitle").textContent=titles[id];
+
+ if(id==="ranking")renderRanking();
+ if(id==="events")renderEvents();
+ if(id==="diary")renderDiary();
+ if(id==="programmes")renderPrograms();
+ updateStats();
+}
+
+function fillOptions(){
+ ["eventStudent","diaryStudent"].forEach(id=>{
+  document.getElementById(id).innerHTML=students.map(s=>
+   `<option value="${safe(s)}">${safe(s)}</option>`).join("");
+ });
+ document.getElementById("loginWing").innerHTML=wings.map(w=>
+  `<option value="${safe(w)}">${safe(w)}</option>`).join("");
+}
+fillOptions();
+
+/* COMMITTEE */
+function buildCommittee(){
+ const grid=document.getElementById("committeeGrid");
+ grid.innerHTML=committeeRoles.map((role,index)=>`
+  <div class="card">
+   <div class="eyebrow">${String(index+1).padStart(2,"0")} / COMMITTEE</div>
+   <h3>${role.title}</h3>
+   <img id="${role.key}_img" class="profile-img" alt="${role.title}">
+   <h3 id="${role.key}_name">${role.title} Name</h3>
+   <label>Name</label>
+   <input id="${role.key}_name_input" placeholder="${role.title} name">
+   <label>Photo URL</label>
+   <input id="${role.key}_img_input" placeholder="Paste image URL">
+   <button class="action" onclick="saveCommittee('${role.key}')">Save ${role.title}</button>
+  </div>
+ `).join("");
+ loadCommittee();
+}
+
+function getRoleValue(role,field){
+ if(role.key==="president"){
+  return localStorage.getItem(field==="name"?"uswah_president":"uswah_president_img")||"";
+ }
+ if(role.key==="secretary"){
+  return localStorage.getItem(field==="name"?"uswah_secretary":"uswah_secretary_img")||"";
+ }
+ return localStorage.getItem("uswah_"+role.key+(field==="name"?"":"_img"))||"";
+}
+
+function setRoleValue(role,field,value){
+ if(role.key==="president"){
+  localStorage.setItem(field==="name"?"uswah_president":"uswah_president_img",value);
+ }else if(role.key==="secretary"){
+  localStorage.setItem(field==="name"?"uswah_secretary":"uswah_secretary_img",value);
+ }else{
+  localStorage.setItem("uswah_"+role.key+(field==="name"?"":"_img"),value);
+ }
+}
+
+function saveCommittee(key){
+ const role=committeeRoles.find(r=>r.key===key);
+ if(!role)return;
+ const name=document.getElementById(key+"_name_input").value.trim();
+ const img=document.getElementById(key+"_img_input").value.trim();
+ setRoleValue(role,"name",name);
+ setRoleValue(role,"img",img);
+ loadCommittee();
+ alert(role.title+" details saved!");
+}
+
+function loadCommittee(){
+ committeeRoles.forEach(role=>{
+  const name=getRoleValue(role,"name");
+  const img=getRoleValue(role,"img");
+  document.getElementById(role.key+"_name").textContent=name||role.title+" Name";
+  document.getElementById(role.key+"_name_input").value=name;
+  document.getElementById(role.key+"_img_input").value=img;
+  const image=document.getElementById(role.key+"_img");
+  image.src=img||placeholder(role.title.toUpperCase());
+  image.onerror=function(){this.src=placeholder(role.title.toUpperCase())};
+ });
+}
+buildCommittee();
+
+/* WINGS */
+function buildWings(){
+ document.getElementById("wingButtons").innerHTML=wings.map((w,i)=>
+  `<button class="wing-button" onclick="openWing(${i})">${safe(w)}<span>VIEW WING PROFILE ↗</span></button>`
+ ).join("");
+}
+
+function openWing(index){
+ const w=wings[index];
+ currentWing=w;
+ const p=profiles[w]||{};
+ document.getElementById("wingTitle").textContent=w;
+ document.getElementById("chairName").textContent=p.chair||"Chairman Name";
+ document.getElementById("chairImg").src=p.chairImg||placeholder("CHAIRMAN");
+ document.getElementById("convName").textContent=p.conv||"Convenor Name";
+ document.getElementById("convImg").src=p.convImg||placeholder("CONVENOR");
+ document.getElementById("chairNameInput").value=p.chair||"";
+ document.getElementById("chairImgInput").value=p.chairImg||"";
+ document.getElementById("convNameInput").value=p.conv||"";
+ document.getElementById("convImgInput").value=p.convImg||"";
+ document.getElementById("wingDetails").classList.remove("hidden");
+ document.getElementById("wingDetails").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function saveWing(){
+ if(!currentWing)return;
+ profiles[currentWing]={
+  chair:document.getElementById("chairNameInput").value.trim(),
+  chairImg:document.getElementById("chairImgInput").value.trim(),
+  conv:document.getElementById("convNameInput").value.trim(),
+  convImg:document.getElementById("convImgInput").value.trim()
+ };
+ save("uswah_profiles",profiles);
+ openWing(wings.indexOf(currentWing));
+ alert("Wing details saved!");
+}
+buildWings();
+
+/* EVENTS DIARY LOGIN */
+function unlockEvents(){
+ const wing=document.getElementById("loginWing").value;
+ const password=document.getElementById("eventsPassword").value;
+
+ if(password!==wingPasswords[wing]){
+  alert("Incorrect password for "+wing+"!");
+  return;
+ }
+
+ currentWing=wing;
+ document.getElementById("eventsLocked").classList.add("hidden");
+ document.getElementById("eventsContent").classList.remove("hidden");
+ document.getElementById("loggedWing").textContent=wing;
+ document.getElementById("eventWing").innerHTML=`<option>${safe(wing)}</option>`;
+ document.getElementById("eventWing").value=wing;
+ document.getElementById("eventPassword").value="";
+ renderEvents();
+}
+
+function logoutEvents(){
+ currentWing="";
+ document.getElementById("eventsPassword").value="";
+ document.getElementById("eventsContent").classList.add("hidden");
+ document.getElementById("eventsLocked").classList.remove("hidden");
+}
+
+/* ADD / DELETE EVENT MARKS */
+function addEvent(){
+ const wing=currentWing;
+ const program=document.getElementById("eventProgram").value.trim();
+ const student=document.getElementById("eventStudent").value;
+ const date=document.getElementById("eventDate").value;
+ const position=document.getElementById("eventPosition").value;
+ const raw=document.getElementById("eventPoints").value;
+ const points=Number(raw);
+
+ if(!wing){
+  alert("Please login with your wing first.");
+  return;
+ }
+ if(!program||!date||raw===""||!Number.isFinite(points)||points<0){
+  alert("Please enter programme, date and valid points.");
+  return;
+ }
+
+ events.push({wing,program,student,date,position,points});
+ save("uswah_events",events);
+
+ document.getElementById("eventProgram").value="";
+ document.getElementById("eventPoints").value="";
+ renderEvents();
+ renderRanking();
+ renderPrograms();
+ updateStats();
+ alert("Event saved!");
+}
+
+function renderEvents(){
+ const list=document.getElementById("eventList");
+ const filtered=events.map((e,i)=>({...e,index:i})).filter(e=>!currentWing||e.wing===currentWing);
+
+ list.innerHTML=filtered.length?filtered.map(e=>`
+  <div class="record">
+   <b>${safe(e.program)}</b>
+   <p class="muted">${safe(e.wing)} · ${safe(e.student)}</p>
+   <p class="muted">Date: ${safe(e.date||"Not set")} · Position: ${safe(e.position||"Not set")}</p>
+   <p>Points: <b>${Number(e.points)||0}</b></p>
+   <button class="action danger" onclick="deleteEvent(${e.index})">Delete Record / Marks</button>
+  </div>
+ `).join(""):"<p class='muted'>No event records found for this wing.</p>";
+}
+
+function deleteEvent(i){
+ if(!confirm("Are you sure you want to delete this event and its marks?"))return;
+ events.splice(i,1);
+ save("uswah_events",events);
+ renderEvents();
+ renderRanking();
+ renderPrograms();
+ updateStats();
+}
+
+/* PROGRAMMES PAGE */
+function getProgramGroups(){
+ const groups={};
+ events.forEach((e,index)=>{
+  const key=[e.program,e.date,e.wing].join("||");
+  if(!groups[key]){
+   groups[key]={program:e.program,date:e.date,wing:e.wing,records:[]};
+  }
+  groups[key].records.push({...e,index});
+ });
+ return Object.values(groups).sort((a,b)=>
+  String(b.date).localeCompare(String(a.date))
+ );
+}
+
+function renderPrograms(){
+ const groups=getProgramGroups();
+ document.getElementById("programList").innerHTML=groups.length?
+  groups.map((g,i)=>`
+   <div class="card program-card" onclick="openProgram(${i})">
+    <div class="eyebrow">${safe(g.wing)}</div>
+    <h3>${safe(g.program)}</h3>
+    <p class="muted">Date: ${safe(g.date||"Not set")}</p>
+    <p class="muted">${g.records.length} result(s) · Click to view results</p>
+   </div>
+  `).join(""):"<p class='muted'>No programmes have been added yet.</p>";
+}
+
+function openProgram(index){
+ const group=getProgramGroups()[index];
+ if(!group)return;
+ document.getElementById("programResults").classList.remove("hidden");
+ document.getElementById("programResultTitle").textContent=group.program+" — "+group.wing;
+ document.getElementById("programResultList").innerHTML=`
+  <p class="muted">Date: ${safe(group.date||"Not set")}</p>
+  ${group.records.map(r=>`
+   <div class="record">
+    <b>${safe(r.student)}</b>
+    <p class="muted">Position: ${safe(r.position||"Not set")}</p>
+    <p>Points: <b>${Number(r.points)||0}</b></p>
+   </div>
+  `).join("")}
+ `;
+ document.getElementById("programResults").scrollIntoView({behavior:"smooth"});
+}
+
+function closeProgramResults(){
+ document.getElementById("programResults").classList.add("hidden");
+}
+
+/* USWAH DIARY */
+function unlockDiary(){
+ if(document.getElementById("diaryPassword").value==="USWAH26"){
+  document.getElementById("diaryLocked").classList.add("hidden");
+  document.getElementById("diaryContent").classList.remove("hidden");
+  renderDiary();
+ }else{
+  alert("Incorrect password!");
+ }
+}
+
+function addDiary(){
+ const student=document.getElementById("diaryStudent").value;
+ const program=document.getElementById("diaryProgram").value.trim();
+ const raw=document.getElementById("diaryPoints").value;
+ const points=Number(raw);
+
+ if(!program||raw===""||!Number.isFinite(points)||points<0){
+  alert("Enter programme and valid points.");
+  return;
+ }
+
+ diary.push({student,program,points});
+ save("uswah_diary",diary);
+ document.getElementById("diaryProgram").value="";
+ document.getElementById("diaryPoints").value="";
+ renderDiary();
+ renderRanking();
+ updateStats();
+ alert("Points saved!");
+}
+
+function renderDiary(){
+ document.getElementById("diaryList").innerHTML=diary.length?
+  diary.map((d,i)=>`
+   <div class="record">
+    <b>${safe(d.student)}</b>
+    <p class="muted">${safe(d.program)}</p>
+    <p>Points: <b>${Number(d.points)||0}</b></p>
+    <button class="action danger" onclick="deleteDiary(${i})">Delete Record / Marks</button>
+   </div>
+  `).join(""):"<p class='muted'>No points added yet.</p>";
+}
+
+function deleteDiary(i){
+ if(!confirm("Are you sure you want to delete this points record?"))return;
+ diary.splice(i,1);
+ save("uswah_diary",diary);
+ renderDiary();
+ renderRanking();
+ updateStats();
+}
+
+/* RANKING */
+function getRanking(){
+ const totals={};
+ students.forEach(s=>totals[s]=0);
+
+ [...events,...diary].forEach(item=>{
+  if(Object.prototype.hasOwnProperty.call(totals,item.student)){
+   totals[item.student]+=Number(item.points)||0;
+  }
+ });
+
+ return students.map(student=>({student,points:totals[student]}))
+  .sort((a,b)=>b.points-a.points||a.student.localeCompare(b.student));
+}
+
+function renderRanking(){
+ const sorted=getRanking();
+
+ document.getElementById("topThree").innerHTML=sorted.slice(0,3).map((s,i)=>`
+  <div class="card">
+   <div class="eyebrow">RANK ${i+1}</div>
+   <div class="stat-number">${s.points}</div>
+   <h3>${safe(s.student)}</h3>
+   <p class="muted">TOTAL POINTS</p>
+  </div>
+ `).join("");
+
+ let previous=null,rank=0;
+ document.getElementById("rankingRows").innerHTML=sorted.map((s,i)=>{
+  if(s.points!==previous){rank=i+1;previous=s.points}
+  return `<tr><td class="${rank<=3?'top-rank':''}">${rank}</td><td>${safe(s.student)}</td><td><b>${s.points}</b></td></tr>`;
+ }).join("");
+}
+
+function updateStats(){
+ document.getElementById("totalEvents").textContent=
+  String(events.length+diary.length).padStart(2,"0");
+}
+
+updateStats();
+renderRanking();
+renderPrograms();
+</script>
+</body>
+</html>
